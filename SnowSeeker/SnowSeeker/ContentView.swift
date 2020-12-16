@@ -8,11 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var filterOption = "default"
+    @State private var isShowingSettingsSheet = false
+    
     @ObservedObject var favorites = Favorites()
+    
     let resorts: [Resort] = Bundle.main.decode("resorts.json")
+    var sortedResorts: [Resort] {
+        switch filterOption {
+        case "alphabetically":
+            return self.resorts.sorted { $0.name < $1.name }
+        case "by country":
+            return self.resorts.sorted { $0.country < $1.country }
+        default:
+            return self.resorts
+        }
+    }
+    
     var body: some View {
         NavigationView {
-            List(resorts) { resort in
+            List(sortedResorts) { resort in
                 NavigationLink(destination: ResortView(resort: resort)) {
                     Image(resort.country)
                         .resizable()
@@ -41,10 +56,19 @@ struct ContentView: View {
                 }
             }
             .navigationBarTitle("Resorts")
+            .navigationBarItems(trailing: Button(action: {
+                self.isShowingSettingsSheet = true
+            }, label: {
+                Image(systemName: "gear")
+                    .font(.title2)
+            }))
             
             // this view will be shown after the user runs the app before he select the resort from the list
             WelcomeView()
         }
+        .sheet(isPresented: $isShowingSettingsSheet, content: {
+            SettingsView(filterOption: self.$filterOption)
+        })
         .environmentObject(favorites)
 //        // StackNavigationViewStyle will be used for phones
 //        .phoneOnlyStackNavigationView()
