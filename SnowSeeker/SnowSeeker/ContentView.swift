@@ -9,19 +9,61 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var filterOption = Resort.SortingOptions.original
+    @State private var sizeFilter = 0
+    @State private var priceFilter = 0
+    @State private var countryFilter = ""
     @State private var isShowingSettingsSheet = false
     
     @ObservedObject var favorites = Favorites()
     
     let resorts: [Resort] = Bundle.main.decode("resorts.json")
+    
+    var countries: Set<String> {
+        return Set(resorts.map { $0.country } )
+    }
+    
+    var filteredBySize: [Resort] {
+        switch sizeFilter {
+        case 1:
+            return resorts.filter { $0.size == 1}
+        case 2:
+            return resorts.filter { $0.size == 2}
+        case 3:
+            return resorts.filter { $0.size == 3}
+        default:
+            return resorts
+        }
+    }
+    
+    var filteredByPrice: [Resort] {
+        switch priceFilter {
+        case 1:
+            return filteredBySize.filter { $0.price == 1}
+        case 2:
+            return filteredBySize.filter { $0.price == 2}
+        case 3:
+            return filteredBySize.filter { $0.price == 3}
+        default:
+            return filteredBySize
+        }
+    }
+    
+    var filteredByCountry: [Resort] {
+        if countryFilter == "" {
+            return self.filteredByPrice
+        } else {
+            return self.filteredByPrice.filter { $0.country == countryFilter }
+        }
+    }
+    
     var sortedResorts: [Resort] {
         switch filterOption {
         case .alphabetical:
-            return self.resorts.sorted { $0.name < $1.name }
+            return self.filteredByCountry.sorted { $0.name < $1.name }
         case .country:
-            return self.resorts.sorted { $0.country < $1.country }
+            return self.filteredByCountry.sorted { $0.country < $1.country }
         default:
-            return self.resorts
+            return self.filteredByCountry
         }
     }
     
@@ -67,7 +109,7 @@ struct ContentView: View {
             WelcomeView()
         }
         .sheet(isPresented: $isShowingSettingsSheet, content: {
-            SettingsView(filterOption: self.$filterOption)
+            SettingsView(filterOption: self.$filterOption, sizeFilter: self.$sizeFilter, priceFilter: self.$priceFilter, countryFilter: self.$countryFilter, countries: self.countries)
         })
         .environmentObject(favorites)
 //        // StackNavigationViewStyle will be used for phones

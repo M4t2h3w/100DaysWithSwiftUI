@@ -11,6 +11,10 @@ struct SettingsView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @Binding var filterOption: Resort.SortingOptions
+    @Binding var sizeFilter: Int
+    @Binding var priceFilter: Int
+    @Binding var countryFilter: String
+    @State var countries: Set<String>
 
     var body: some View {
         NavigationView {
@@ -23,6 +27,32 @@ struct SettingsView: View {
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                }
+                Section(header: Text("Filter")) {
+                    Text("Filter by size:")
+                    Picker("", selection: $sizeFilter) {
+                        Text("All").tag(0)
+                        Text("Small").tag(1)
+                        Text("Average").tag(2)
+                        Text("Large").tag(3)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    
+                    Text("Filter by price:")
+                    Picker("", selection: $priceFilter) {
+                        Text("All").tag(0)
+                        Text("$").tag(1)
+                        Text("$$").tag(2)
+                        Text("$$$").tag(3)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    
+                    Picker("Filter by country:", selection: $countryFilter) {
+                        Text("All").tag("")
+                        ForEach(Array(countries), id:\.self) { country in
+                            Text(country)
+                        }
+                    }
                 }
             }
             
