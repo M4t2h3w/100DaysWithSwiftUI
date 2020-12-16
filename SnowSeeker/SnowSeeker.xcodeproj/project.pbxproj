@@ -20,6 +20,7 @@
 		D2668006258A120B003FE9A0 /* ResortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2668005258A120B003FE9A0 /* ResortView.swift */; };
 		D2668009258A1353003FE9A0 /* SkiDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2668008258A1353003FE9A0 /* SkiDetailsView.swift */; };
 		D266800C258A13B7003FE9A0 /* ResortDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D266800B258A13B7003FE9A0 /* ResortDetailsView.swift */; };
+		D266800F258A2938003FE9A0 /* Facility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D266800E258A2938003FE9A0 /* Facility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		D2668005258A120B003FE9A0 /* ResortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResortView.swift; sourceTree = "<group>"; };
 		D2668008258A1353003FE9A0 /* SkiDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkiDetailsView.swift; sourceTree = "<group>"; };
 		D266800B258A13B7003FE9A0 /* ResortDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResortDetailsView.swift; sourceTree = "<group>"; };
+		D266800E258A2938003FE9A0 /* Facility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				D2667FE4258A03E0003FE9A0 /* ContentView.swift */,
 				D2668008258A1353003FE9A0 /* SkiDetailsView.swift */,
 				D266800B258A13B7003FE9A0 /* ResortDetailsView.swift */,
+				D266800E258A2938003FE9A0 /* Facility.swift */,
 				D2668005258A120B003FE9A0 /* ResortView.swift */,
 				D2668002258A0FF3003FE9A0 /* WelcomeView.swift */,
 				D2667FFC258A0B98003FE9A0 /* Resort.swift */,
@@ -169,6 +172,7 @@
 			files = (
 				D2667FE1258A03E0003FE9A0 /* AppDelegate.swift in Sources */,
 				D2668003258A0FF3003FE9A0 /* WelcomeView.swift in Sources */,
+				D266800F258A2938003FE9A0 /* Facility.swift in Sources */,
 				D2667FE3258A03E0003FE9A0 /* SceneDelegate.swift in Sources */,
 				D2668006258A120B003FE9A0 /* ResortView.swift in Sources */,
 				D2668000258A0C48003FE9A0 /* Bundle-Decodable.swift in Sources */,
