@@ -32,6 +32,21 @@ struct ContentView: View {
                 }
             }
             .navigationBarTitle("Resorts")
+            
+            // this view will be shown after the user runs the app before he select the resort from the list
+            WelcomeView()
+        }
+        // StackNavigationViewStyle will be used for phones
+        .phoneOnlyStackNavigationView()
+    }
+}
+
+extension View {
+    func phoneOnlyStackNavigationView() -> some View {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return AnyView(self.navigationViewStyle(StackNavigationViewStyle()))
+        } else {
+            return AnyView(self)
         }
     }
 }
