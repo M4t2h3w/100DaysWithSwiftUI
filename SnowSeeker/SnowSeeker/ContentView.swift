@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var filterOption = Resort.FilerOptions.original
+    @State private var filterOption = Resort.SortingOptions.original
     @State private var isShowingSettingsSheet = false
     
     @ObservedObject var favorites = Favorites()

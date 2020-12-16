@@ -10,14 +10,14 @@ import SwiftUI
 struct SettingsView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @Binding var filterOption: Resort.FilerOptions
+    @Binding var filterOption: Resort.SortingOptions
 
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Sort")) {
                     Picker("", selection: $filterOption) {
-                        ForEach(Resort.FilerOptions.allCases, id:\.self) { option in
+                        ForEach(Resort.SortingOptions.allCases, id:\.self) { option in
                             Text(option.rawValue)
                                 .tag(option)
                         }
