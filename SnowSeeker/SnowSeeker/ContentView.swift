@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var filterOption = "default"
+    @State private var filterOption = Resort.FilerOptions.original
     @State private var isShowingSettingsSheet = false
     
     @ObservedObject var favorites = Favorites()
@@ -16,9 +16,9 @@ struct ContentView: View {
     let resorts: [Resort] = Bundle.main.decode("resorts.json")
     var sortedResorts: [Resort] {
         switch filterOption {
-        case "alphabetically":
+        case .alphabetical:
             return self.resorts.sorted { $0.name < $1.name }
-        case "by country":
+        case .country:
             return self.resorts.sorted { $0.country < $1.country }
         default:
             return self.resorts

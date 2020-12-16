@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
     @Environment(\.presentationMode) var presentationMode
-    @Binding var filterOption: String
-    @State private var filterArray = ["default", "alphabetically", "by country"]
+    @Binding var filterOption: Resort.FilerOptions
+
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Sort")) {
                     Picker("", selection: $filterOption) {
-                        ForEach(filterArray, id:\.self) { option in
-                            Text(option)
+                        ForEach(Resort.FilerOptions.allCases, id:\.self) { option in
+                            Text(option.rawValue)
+                                .tag(option)
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())

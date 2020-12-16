@@ -26,4 +26,10 @@ struct Resort: Codable, Identifiable {
     
     static let allResorts: [Resort] = Bundle.main.decode("resorts.json")
     static let example = allResorts[0]
+    
+    enum FilerOptions: String, CaseIterable {
+        case original = "default"
+        case alphabetical = "alphabetically"
+        case country = "by country"
+    }
 }
