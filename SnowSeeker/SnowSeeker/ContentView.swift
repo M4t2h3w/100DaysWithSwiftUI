@@ -22,48 +22,22 @@ struct ContentView: View {
         return Set(resorts.map { $0.country } )
     }
     
-    var filteredBySize: [Resort] {
-        switch sizeFilter {
-        case 1:
-            return resorts.filter { $0.size == 1}
-        case 2:
-            return resorts.filter { $0.size == 2}
-        case 3:
-            return resorts.filter { $0.size == 3}
-        default:
-            return resorts
-        }
-    }
-    
-    var filteredByPrice: [Resort] {
-        switch priceFilter {
-        case 1:
-            return filteredBySize.filter { $0.price == 1}
-        case 2:
-            return filteredBySize.filter { $0.price == 2}
-        case 3:
-            return filteredBySize.filter { $0.price == 3}
-        default:
-            return filteredBySize
-        }
-    }
-    
-    var filteredByCountry: [Resort] {
-        if countryFilter == "" {
-            return self.filteredByPrice
-        } else {
-            return self.filteredByPrice.filter { $0.country == countryFilter }
+    var filteredResorts: [Resort] {
+        return self.resorts.filter {
+            sizeFilter == 0 ? true : $0.size == self.sizeFilter &&
+            priceFilter == 0 ? true : $0.price == self.priceFilter &&
+            countryFilter == "" ? true : $0.country == self.countryFilter
         }
     }
     
     var sortedResorts: [Resort] {
         switch filterOption {
         case .alphabetical:
-            return self.filteredByCountry.sorted { $0.name < $1.name }
+            return self.filteredResorts.sorted { $0.name < $1.name }
         case .country:
-            return self.filteredByCountry.sorted { $0.country < $1.country }
+            return self.filteredResorts.sorted { $0.country < $1.country }
         default:
-            return self.filteredByCountry
+            return self.filteredResorts
         }
     }
     
